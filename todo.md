@@ -1,0 +1,313 @@
+# QA Event Artifact Generator TODO
+
+## Project Goal
+Build a Python-based QA tooling project that converts long test recordings into structured, event-level artifacts.
+
+The tool should:
+- segment long screen recordings into event-based video clips
+- generate structured metadata per clip
+- start with manually defined JSON events
+- later support generating events automatically from logs
+- improve debugging, review, and bug-report artifact quality
+
+---
+
+## Scope Guardrails
+- no UI for MVP
+- no ML or computer vision in early phases
+- no OCR in MVP
+- no over-engineering
+- prioritize a working CLI pipeline first
+- keep the project generic and not tied to one company or product
+
+---
+
+## MVP Definition
+Input:
+- video file
+- manually authored `events.manual.json`
+
+Output:
+- segmented video clips
+- `metadata.json`
+
+Success criteria:
+- one command can process a sample video and event file
+- clips are generated correctly
+- metadata is valid and readable
+- validation errors are clear and actionable
+
+---
+
+## Phase 0: Project Setup
+- [ ] Create repo
+- [ ] Add package-style folder structure
+- [ ] Add `pyproject.toml`
+- [ ] Add `requirements.txt`
+- [ ] Add `.gitignore`
+- [ ] Add `README.md` skeleton
+- [ ] Add `Makefile`
+- [ ] Add initial test suite structure
+- [ ] Confirm `ffmpeg` is installed and callable
+- [ ] Add `todo.md`
+- [ ] Add basic dev setup instructions
+- [ ] Add sample command examples to README
+- [ ] Decide whether to use `argparse` or `typer` for CLI
+- [ ] Decide minimal supported Python version
+
+---
+
+## Phase 1: Manual Event-Based Segmentation MVP
+### CLI
+- [ ] Create CLI entrypoint
+- [ ] Add `--video` argument
+- [ ] Add `--events` argument
+- [ ] Add `--output` argument
+- [ ] Add terminal summary output
+- [ ] Add non-zero exit codes for failures
+
+### Validation
+- [ ] Validate video path
+- [ ] Validate events JSON path
+- [ ] Validate event schema
+- [ ] Validate allowed time fields
+- [ ] Validate start < end for duration events
+- [ ] Validate timestamp formatting
+- [ ] Validate events do not exceed video length when possible
+- [ ] Validate safe clip names
+- [ ] Warn on overlapping events
+
+### Event Support
+- [ ] Support duration-based events
+- [ ] Support point-in-time events with buffers
+- [ ] Support optional notes field
+- [ ] Support optional tags field
+- [ ] Support default pre/post buffers
+- [ ] Support event-level pre/post buffer overrides
+
+### Segmentation
+- [ ] Implement ffmpeg wrapper
+- [ ] Build and validate ffmpeg command generation
+- [ ] Generate single clip
+- [ ] Generate multiple clips
+- [ ] Sanitize filenames
+- [ ] Handle ffmpeg execution errors cleanly
+- [ ] Skip or fail gracefully for invalid event ranges
+
+### Metadata
+- [ ] Write `metadata.json`
+- [ ] Include source video path
+- [ ] Include clip file path
+- [ ] Include event label
+- [ ] Include timing info
+- [ ] Include notes and tags when present
+- [ ] Include duration per clip
+- [ ] Include generation timestamp
+- [ ] Include warnings for skipped or adjusted events
+
+### Testing
+- [ ] Add unit tests for validators
+- [ ] Add unit tests for event loader
+- [ ] Add unit tests for filename sanitization
+- [ ] Add unit tests for ffmpeg command generation
+- [ ] Add smoke test for end-to-end flow
+
+### README
+- [ ] Add project overview
+- [ ] Add install steps
+- [ ] Add ffmpeg dependency note
+- [ ] Add manual JSON example
+- [ ] Add CLI usage example
+- [ ] Add sample output example
+
+---
+
+## Phase 1.5: Input JSON Generation
+### Schema and Authoring
+- [ ] Define official `events.manual.json` schema
+- [ ] Document required vs optional fields
+- [ ] Add JSON example templates
+- [ ] Document duration-event vs point-event rules
+- [ ] Add schema examples in `docs/event-schema.md`
+
+### JSON Generation Helpers
+- [ ] Create `scripts/generate_manual_events_json.py`
+- [ ] Allow generating starter JSON from a video path
+- [ ] Auto-fill source video path in template
+- [ ] Add support for creating numbered placeholder events
+- [ ] Add support for generating empty notes/tags fields
+- [ ] Add support for global default buffers in template
+
+### Validation UX
+- [ ] Add `--dry-run` validation mode
+- [ ] Print clear validation errors
+- [ ] Warn on overlapping events
+- [ ] Fail clearly on out-of-range timestamps
+- [ ] Warn on duplicate labels
+- [ ] Warn on filenames that would collide after sanitizing
+
+### Possible Future Input Helpers
+- [ ] Consider CSV-to-JSON helper
+- [ ] Consider converting simple timestamp text files into JSON
+- [ ] Consider scaffold command like `init-events`
+
+---
+
+## Phase 2: Log-Driven Event Generation
+### Log Input
+- [ ] Add `--log` argument
+- [ ] Add `--recording-start` argument
+- [ ] Add `--event-rules` argument
+- [ ] Support text log input format first
+- [ ] Document supported log format assumptions
+
+### Parsing
+- [ ] Implement raw log reader
+- [ ] Parse timestamped log lines
+- [ ] Normalize timestamps into internal model
+- [ ] Support malformed-line handling
+- [ ] Add parser warnings for unreadable lines
+
+### Event Extraction
+- [ ] Define event extraction rules
+- [ ] Create `config/event_rules.json`
+- [ ] Support regex-based event extraction
+- [ ] Support severity-based events like ERROR and WARNING
+- [ ] Support domain-specific markers like START and END
+- [ ] Generate normalized event list from logs
+
+### Time Correlation
+- [ ] Convert log timestamps to video offsets
+- [ ] Support configurable default buffers around point events
+- [ ] Warn on negative offsets
+- [ ] Warn on offsets beyond video duration
+- [ ] Document time-alignment assumptions
+
+### Outputs
+- [ ] Generate `generated_events.json`
+- [ ] Feed generated events into segmentation flow
+- [ ] Include correlation details in `metadata.json`
+- [ ] Add source-log reference to metadata
+
+### Testing
+- [ ] Add tests for event extraction
+- [ ] Add tests for time sync
+- [ ] Add malformed-log handling tests
+- [ ] Add end-to-end test for log -> events -> clips flow
+
+---
+
+## Phase 3: Test Data and Fixture Generation
+### Goal
+Create deterministic, reusable test assets so the repo can be demonstrated and tested without private or real-world recordings.
+
+### Sample Video Generation
+- [ ] Create `scripts/generate_sample_video.py`
+- [ ] Generate deterministic sample video
+- [ ] Add visible timer overlay
+- [ ] Add labeled scene changes
+- [ ] Add segments like:
+  - [ ] Session Start
+  - [ ] Login
+  - [ ] Navigation
+  - [ ] Error Popup
+  - [ ] Recovery
+  - [ ] Session End
+- [ ] Keep sample video short enough for easy local testing
+- [ ] Keep sample video small enough for practical repo use or document external generation
+
+### Sample Log Generation
+- [ ] Create `scripts/generate_sample_log.py`
+- [ ] Generate deterministic happy-path log
+- [ ] Generate deterministic error-path log
+- [ ] Generate mixed/noisy log
+- [ ] Align generated logs to sample video timeline
+- [ ] Include INFO / WARNING / ERROR examples
+- [ ] Include event markers useful for event extraction tests
+
+### Manual JSON Fixture Generation
+- [ ] Create valid JSON fixtures
+- [ ] Create invalid JSON fixtures
+- [ ] Create overlapping-event fixtures
+- [ ] Create out-of-range fixtures
+- [ ] Create duration-event examples
+- [ ] Create point-event examples
+- [ ] Create mixed-event examples
+- [ ] Create duplicate-label examples
+- [ ] Create filename-collision examples
+
+### Why This Matters
+- [ ] Document why synthetic test data is used
+- [ ] Emphasize privacy-safe fixtures
+- [ ] Emphasize reproducibility for testing and demo purposes
+- [ ] Emphasize deterministic inputs for reliable automated tests
+
+---
+
+## Phase 4: Reporting and Usability
+- [ ] Add terminal summary report
+- [ ] Add processing statistics
+- [ ] Add warning summary for skipped events
+- [ ] Add optional HTML summary report
+- [ ] Add summary of clip creation success/failure
+- [ ] Add counts by event type
+- [ ] Add clear output directory summary
+
+---
+
+## Phase 5: Portfolio Polish
+### Positioning
+- [ ] Clean README for QA/SDET audience
+- [ ] Keep project framed as QA workflow tooling, not just video splitting
+- [ ] Emphasize debugging and defect-report artifact generation
+- [ ] Keep language generic, not employer-specific
+
+### Presentation
+- [ ] Add architecture diagram
+- [ ] Add demo screenshots or GIF
+- [ ] Add workflow explanation
+- [ ] Add “Why this matters for QA” section
+- [ ] Add future roadmap
+- [ ] Add resume-ready bullet
+- [ ] Add before/after workflow example
+- [ ] Add example CLI commands section
+- [ ] Pin repo on GitHub if polished enough
+
+### Resume / Interview Support
+- [ ] Prepare concise project summary for resume
+- [ ] Prepare STAR-style interview explanation
+- [ ] Prepare tradeoff explanation for why MVP starts with manual JSON before logs
+- [ ] Prepare explanation of how synthetic test data improved testability
+
+---
+
+## Future Enhancements
+- [ ] CSV-to-JSON conversion
+- [ ] Configurable clipping profiles by event type
+- [ ] HTML dashboard/report
+- [ ] Traceability links for test case / bug report integration
+- [ ] More advanced log correlation
+- [ ] Semi-automated event capture workflow
+- [ ] Optional packaging / PyPI readiness
+- [ ] GitHub Actions CI pipeline
+
+---
+
+## Notes
+### Recommended Repo Name
+`qa-event-artifact-generator`
+
+### Recommended Repo Description
+Python CLI tool that converts long test recordings into event-based video clips with structured metadata for faster debugging and QA workflows.
+
+### Positioning Summary
+This project should read as:
+- a QA workflow acceleration tool
+- a structured artifact generator
+- a practical automation utility
+- a portfolio piece that demonstrates systems thinking, tooling design, validation, and reproducibility
+
+Not as:
+- a random video cutting script
+- a drone-only internal tool
+- an ML project in disguise
