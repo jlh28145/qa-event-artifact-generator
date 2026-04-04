@@ -72,8 +72,7 @@ def test_main_log_mode_generates_events(tmp_path, monkeypatch):
     log = tmp_path / "test.log"
     rules = tmp_path / "rules.json"
     video.write_text("dummy video")
-    log.write_text("2026-04-04T12:00:05 ERROR failed
-", encoding="utf-8")
+    log.write_text("2026-04-04T12:00:05 ERROR failed\n", encoding="utf-8")
     rules.write_text(json.dumps({
         "default_pre_buffer": "00:01",
         "default_post_buffer": "00:01",
