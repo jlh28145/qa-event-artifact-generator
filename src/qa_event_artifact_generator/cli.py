@@ -76,6 +76,11 @@ def parse_args(argv=None):
         action="store_true",
         help="Analyze log file and suggest events without generating clips.",
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Validate inputs without generating clips or metadata.",
+    )
     return parser.parse_args(argv)
 
 
