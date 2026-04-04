@@ -10,11 +10,21 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 keywords = ["qa", "video", "events", "cli", "clip", "metadata"]
+authors = [
+    {name = "Portfolio Project", email = "portfolio@example.com"},
+]
+maintainers = [
+    {name = "Portfolio Project", email = "portfolio@example.com"},
+]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Multimedia :: Video",
 ]
 dependencies = []
 

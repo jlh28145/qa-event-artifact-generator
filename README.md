@@ -176,6 +176,11 @@ Generate a sample video with ffmpeg:
 python scripts/generate_sample_video.py --output input/fixtures/short_session_video.mp4
 ```
 
+Convert CSV to events JSON:
+```bash
+python scripts/csv_to_json.py --csv events.csv --output events.manual.json --label-column label --start-column start --end-column end
+```
+
 ## Development
 Run tests with:
 ```bash
@@ -183,14 +188,14 @@ pytest
 ```
 
 ## Future Roadmap
-- CSV-to-JSON event import helpers
-- Configurable clipping profiles by event type
+- CSV-to-JSON event import helpers ✓
+- Configurable clipping profiles by event type ✓
 - (Deferred) Enhanced HTML dashboard with video previews
 - (Deferred) Traceability links for test case/bug report integration
 - Advanced log correlation with multiple time sources
 - Semi-automated event capture workflows
-- PyPI packaging and distribution
-- GitHub Actions CI/CD pipeline
+- PyPI packaging and distribution ✓
+- GitHub Actions CI/CD pipeline ✓
 
 ## Resume Summary
 **QA Event Artifact Generator** - Python CLI tool for automated video segmentation and metadata generation. Built end-to-end QA workflow tooling with FFmpeg integration, log parsing, and comprehensive testing. Demonstrates engineering discipline through deterministic fixture generation and clean architecture.

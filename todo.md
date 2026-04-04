@@ -309,14 +309,14 @@ Create deterministic, reusable test assets so the project can be tested and demo
 ---
 
 ## Future Enhancements
-- [ ] CSV-to-JSON conversion
-- [ ] Configurable clipping profiles by event type
+- [x] CSV-to-JSON conversion
+- [x] Configurable clipping profiles by event type
 - [Deferred] HTML dashboard/report
 - [Deferred] Traceability links for test case / bug report integration
 - [ ] More advanced log correlation
 - [ ] Semi-automated event capture workflow
-- [ ] Optional packaging / PyPI readiness
-- [ ] GitHub Actions CI pipeline
+- [x] Optional packaging / PyPI readiness
+- [x] GitHub Actions CI pipeline
 
 ---
 
