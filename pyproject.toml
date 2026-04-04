@@ -21,6 +21,13 @@ dependencies = []
 [project.scripts]
 qa-event-artifact-generator = "qa_event_artifact_generator.cli:main"
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["qa_event_artifact_generator*"]
+
 [tool.pytest.ini_options]
 minversion = "7.0"
 testpaths = ["tests"]

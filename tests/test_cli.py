@@ -1,6 +1,7 @@
+import json
 from pathlib import Path
 
-from qa_event_artifact_generator.cli import main, parse_args
+from qa_event_artifact_generator.cli import FFmpegWrapper, main, parse_args
 
 
 def test_parse_args():
@@ -33,11 +34,20 @@ def test_main_returns_nonzero_for_missing_files(tmp_path):
     assert result == 1
 
 
-def test_main_validates_paths_and_creates_output_directory(tmp_path):
+def test_main_validates_paths_and_creates_output_directory(tmp_path, monkeypatch):
     video = tmp_path / "video.mp4"
     events = tmp_path / "events.json"
     video.write_text("dummy video")
-    events.write_text("{}")
+    events.write_text(json.dumps([]), encoding="utf-8")
+
+    class DummyFFmpeg:
+        def __init__(self):
+            pass
+
+        def get_video_duration(self, _):
+            return 10.0
+
+    monkeypatch.setattr("qa_event_artifact_generator.cli.FFmpegWrapper", DummyFFmpeg)
 
     output_dir = tmp_path / "output"
     result = main(

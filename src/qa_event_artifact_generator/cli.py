@@ -2,6 +2,13 @@ import argparse
 import sys
 from pathlib import Path
 
+from qa_event_artifact_generator.events.manual_event_loader import EventLoadingError, load_manual_events
+from qa_event_artifact_generator.reporting.summary import summary_message
+from qa_event_artifact_generator.segmentation.ffmpeg_wrapper import FFmpegError, FFmpegWrapper
+from qa_event_artifact_generator.segmentation.metadata_writer import write_metadata
+from qa_event_artifact_generator.segmentation.segmenter import Segmenter
+from qa_event_artifact_generator.validators import validate_events
+
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
@@ -29,43 +36,60 @@ def parse_args(argv=None):
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Validate inputs and paths without generating artifacts.",
+        help="Validate inputs without generating clips or metadata.",
     )
     return parser.parse_args(argv)
 
 
-def validate_path(path: str, *, must_exist: bool = True) -> Path:
-    resolved_path = Path(path)
-    if must_exist and not resolved_path.exists():
-        raise FileNotFoundError(f"Path does not exist: {resolved_path}")
-    return resolved_path
+def validate_path(path: Path, must_exist: bool = True) -> Path:
+    if must_exist and not path.exists():
+        raise FileNotFoundError(f"Path does not exist: {path}")
+    return path
 
 
 def main(argv=None) -> int:
     args = parse_args(argv)
     try:
-        video_path = validate_path(args.video)
-        events_path = validate_path(args.events)
+        video_path = validate_path(Path(args.video))
+        events_path = validate_path(Path(args.events))
         output_path = Path(args.output)
         if output_path.exists() and not output_path.is_dir():
             raise NotADirectoryError(
                 f"Output path exists and is not a directory: {output_path}"
             )
         output_path.mkdir(parents=True, exist_ok=True)
-    except (FileNotFoundError, NotADirectoryError) as exc:
+
+        events = load_manual_events(events_path)
+        ffmpeg = FFmpegWrapper()
+        video_duration = ffmpeg.get_video_duration(video_path)
+        errors, warnings = validate_events(events, video_duration=video_duration)
+
+        print(summary_message(video_path, events_path, output_path, len(events), video_duration))
+        for warning in warnings:
+            print(f"WARNING: {warning}")
+        if errors:
+            for error in errors:
+                print(f"ERROR: {error}", file=sys.stderr)
+            return 1
+
+        if args.dry_run:
+            print("Dry run complete. Inputs are valid.")
+            return 0
+
+        segmenter = Segmenter(ffmpeg)
+        clip_records, segment_warnings = segmenter.segment_events(
+            video_path, events, output_path, dry_run=False
+        )
+        for warning in segment_warnings:
+            print(f"WARNING: {warning}")
+
+        metadata_path = output_path / "metadata.json"
+        write_metadata(metadata_path, video_path, clip_records)
+        print(f"Generated {len(clip_records)} clip(s) and metadata to {output_path}")
+        return 0
+    except (FileNotFoundError, NotADirectoryError, EventLoadingError, FFmpegError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-
-    print("QA Event Artifact Generator")
-    print(f"  video: {video_path}")
-    print(f"  events: {events_path}")
-    print(f"  output: {output_path}")
-    if args.dry_run:
-        print("Dry run complete. Inputs are valid.")
-        return 0
-
-    print("Ready to generate event artifacts.")
-    return 0
 
 
 if __name__ == "__main__":

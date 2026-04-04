@@ -40,85 +40,85 @@ Success criteria:
 ---
 
 ## Phase 0: Project Setup
-- [ ] Create repo
-- [ ] Add package-style folder structure
-- [ ] Add `pyproject.toml`
-- [ ] Add `requirements.txt`
-- [ ] Add `.gitignore`
-- [ ] Add `README.md` skeleton
-- [ ] Add `Makefile`
-- [ ] Add initial test suite structure
-- [ ] Confirm `ffmpeg` is installed and callable
-- [ ] Add `todo.md`
-- [ ] Add basic dev setup instructions
-- [ ] Add sample command examples to README
-- [ ] Decide whether to use `argparse` or `typer` for CLI
-- [ ] Decide minimal supported Python version
+- [x] Create repo
+- [x] Add package-style folder structure
+- [x] Add `pyproject.toml`
+- [x] Add `requirements.txt`
+- [x] Add `.gitignore`
+- [x] Add `README.md` skeleton
+- [x] Add `Makefile`
+- [x] Add initial test suite structure
+- [x] Confirm `ffmpeg` is installed and callable
+- [x] Add `todo.md`
+- [x] Add basic dev setup instructions
+- [x] Add sample command examples to README
+- [x] Decide whether to use `argparse` or `typer` for CLI
+- [x] Decide minimal supported Python version
 
 ---
 
 ## Phase 1: Manual Event-Based Segmentation MVP
 ### CLI
-- [ ] Create CLI entrypoint
-- [ ] Add `--video` argument
-- [ ] Add `--events` argument
-- [ ] Add `--output` argument
-- [ ] Add terminal summary output
-- [ ] Add non-zero exit codes for failures
+- [x] Create CLI entrypoint
+- [x] Add `--video` argument
+- [x] Add `--events` argument
+- [x] Add `--output` argument
+- [x] Add terminal summary output
+- [x] Add non-zero exit codes for failures
 
 ### Validation
-- [ ] Validate video path
-- [ ] Validate events JSON path
-- [ ] Validate event schema
-- [ ] Validate allowed time fields
-- [ ] Validate start < end for duration events
-- [ ] Validate timestamp formatting
-- [ ] Validate events do not exceed video length when possible
-- [ ] Validate safe clip names
-- [ ] Warn on overlapping events
+- [x] Validate video path
+- [x] Validate events JSON path
+- [x] Validate event schema
+- [x] Validate allowed time fields
+- [x] Validate start < end for duration events
+- [x] Validate timestamp formatting
+- [x] Validate events do not exceed video length when possible
+- [x] Validate safe clip names
+- [x] Warn on overlapping events
 
 ### Event Support
-- [ ] Support duration-based events
-- [ ] Support point-in-time events with buffers
-- [ ] Support optional notes field
-- [ ] Support optional tags field
-- [ ] Support default pre/post buffers
-- [ ] Support event-level pre/post buffer overrides
+- [x] Support duration-based events
+- [x] Support point-in-time events with buffers
+- [x] Support optional notes field
+- [x] Support optional tags field
+- [x] Support default pre/post buffers
+- [x] Support event-level pre/post buffer overrides
 
 ### Segmentation
-- [ ] Implement ffmpeg wrapper
-- [ ] Build and validate ffmpeg command generation
-- [ ] Generate single clip
-- [ ] Generate multiple clips
-- [ ] Sanitize filenames
-- [ ] Handle ffmpeg execution errors cleanly
-- [ ] Skip or fail gracefully for invalid event ranges
+- [x] Implement ffmpeg wrapper
+- [x] Build and validate ffmpeg command generation
+- [x] Generate single clip
+- [x] Generate multiple clips
+- [x] Sanitize filenames
+- [x] Handle ffmpeg execution errors cleanly
+- [x] Skip or fail gracefully for invalid event ranges
 
 ### Metadata
-- [ ] Write `metadata.json`
-- [ ] Include source video path
-- [ ] Include clip file path
-- [ ] Include event label
-- [ ] Include timing info
-- [ ] Include notes and tags when present
-- [ ] Include duration per clip
-- [ ] Include generation timestamp
-- [ ] Include warnings for skipped or adjusted events
+- [x] Write `metadata.json`
+- [x] Include source video path
+- [x] Include clip file path
+- [x] Include event label
+- [x] Include timing info
+- [x] Include notes and tags when present
+- [x] Include duration per clip
+- [x] Include generation timestamp
+- [x] Include warnings for skipped or adjusted events
 
 ### Testing
-- [ ] Add unit tests for validators
-- [ ] Add unit tests for event loader
-- [ ] Add unit tests for filename sanitization
-- [ ] Add unit tests for ffmpeg command generation
-- [ ] Add smoke test for end-to-end flow
+- [x] Add unit tests for validators
+- [x] Add unit tests for event loader
+- [x] Add unit tests for filename sanitization
+- [x] Add unit tests for ffmpeg command generation
+- [x] Add smoke test for end-to-end flow
 
 ### README
-- [ ] Add project overview
-- [ ] Add install steps
-- [ ] Add ffmpeg dependency note
-- [ ] Add manual JSON example
-- [ ] Add CLI usage example
-- [ ] Add sample output example
+- [x] Add project overview
+- [x] Add install steps
+- [x] Add ffmpeg dependency note
+- [x] Add manual JSON example
+- [x] Add CLI usage example
+- [x] Add sample output example
 
 ---
 
