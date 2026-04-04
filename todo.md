@@ -274,39 +274,37 @@ Create deterministic, reusable test assets so the project can be tested and demo
   - [x] Demonstrates engineering discipline
 
 ## Phase 4: Reporting and Usability
-- [ ] Add terminal summary report
-- [ ] Add processing statistics
-- [ ] Add warning summary for skipped events
-- [ ] Add optional HTML summary report
-- [ ] Add summary of clip creation success/failure
-- [ ] Add counts by event type
-- [ ] Add clear output directory summary
+- [x] Add terminal summary report
+- [x] Add processing statistics
+- [x] Add warning summary for skipped events
+- [x] Add optional HTML summary report
+- [x] Add summary of clip creation success/failure
+- [x] Add counts by event type
+- [x] Add clear output directory summary
 
 ---
 
 ## Phase 5: Portfolio Polish
 ### Positioning
-- [ ] Clean README for QA/SDET audience
-- [ ] Keep project framed as QA workflow tooling, not just video splitting
-- [ ] Emphasize debugging and defect-report artifact generation
-- [ ] Keep language generic, not employer-specific
+- [x] Clean README for QA/SDET audience
+- [x] Keep project framed as QA workflow tooling, not just video splitting
+- [x] Emphasize debugging and defect-report artifact generation
+- [x] Keep language generic, not employer-specific
 
 ### Presentation
-- [ ] Add architecture diagram
-- [ ] Add demo screenshots or GIF
-- [ ] Add workflow explanation
-- [ ] Add “Why this matters for QA” section
-- [ ] Add future roadmap
-- [ ] Add resume-ready bullet
-- [ ] Add before/after workflow example
-- [ ] Add example CLI commands section
-- [ ] Pin repo on GitHub if polished enough
+- [x] Add architecture diagram
+- [x] Add workflow explanation
+- [x] Add "Why this matters for QA" section
+- [x] Add future roadmap
+- [x] Add resume-ready bullet
+- [x] Add before/after workflow example
+- [x] Add example CLI commands section
 
 ### Resume / Interview Support
-- [ ] Prepare concise project summary for resume
-- [ ] Prepare STAR-style interview explanation
-- [ ] Prepare tradeoff explanation for why MVP starts with manual JSON before logs
-- [ ] Prepare explanation of how synthetic test data improved testability
+- [x] Prepare concise project summary for resume
+- [x] Prepare STAR-style interview explanation
+- [x] Prepare tradeoff explanation for why MVP starts with manual JSON before logs
+- [x] Prepare explanation of how synthetic test data improved testability
 
 ---
 

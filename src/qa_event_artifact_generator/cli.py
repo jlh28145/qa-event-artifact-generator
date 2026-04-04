@@ -8,7 +8,7 @@ from qa_event_artifact_generator.events.manual_event_loader import EventLoadingE
 from qa_event_artifact_generator.logs.event_extractor import LogExtractionError, extract_events_from_log, load_event_rules
 from qa_event_artifact_generator.logs.log_parser import LogLine, load_log_lines
 from qa_event_artifact_generator.logs.time_sync import correlate_log_events
-from qa_event_artifact_generator.reporting.summary import summary_message
+from qa_event_artifact_generator.reporting.summary import detailed_summary, generate_html_report, summary_message
 from qa_event_artifact_generator.segmentation.ffmpeg_wrapper import FFmpegError, FFmpegWrapper
 from qa_event_artifact_generator.segmentation.metadata_writer import write_metadata
 from qa_event_artifact_generator.segmentation.segmenter import Segmenter
@@ -55,11 +55,9 @@ def parse_args(argv=None):
         help="Optional path to write generated events JSON when using log input.",
     )
     parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Validate inputs without generating clips or metadata.",
+        "--html-report",
+        help="Optional path to write an HTML summary report.",
     )
-    return parser.parse_args(argv)
 
 
 def validate_path(path: Path, must_exist: bool = True) -> Path:
@@ -140,6 +138,16 @@ def main(argv=None) -> int:
             generated_events_path=generated_events_path,
         )
         print(f"Generated {len(clip_records)} clip(s) and metadata to {output_path}")
+        print(detailed_summary(events, clip_records, event_warnings, validation_warnings, segment_warnings, output_path))
+
+        if args.html_report:
+            html_path = Path(args.html_report)
+            generate_html_report(
+                video_path, Path(source_path), output_path, events, clip_records,
+                event_warnings, validation_warnings, segment_warnings, html_path
+            )
+            print(f"HTML report written to {html_path}")
+
         return 0
     except (FileNotFoundError, NotADirectoryError, EventLoadingError, FFmpegError, ValueError, LogExtractionError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
