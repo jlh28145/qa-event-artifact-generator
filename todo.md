@@ -205,72 +205,73 @@ Create deterministic, reusable test assets so the project can be tested and demo
 ---
 
 ### Sample Video Generation
-- [ ] Define fixed timeline for sample video (35 seconds total)
-- [ ] Create segment plan:
-  - [ ] SESSION_START (0–4s)
-  - [ ] LOGIN_SCREEN (5–9s)
-  - [ ] DASHBOARD (10–14s)
-  - [ ] NAVIGATION (15–19s)
-  - [ ] ERROR_POPUP (20–24s)
-  - [ ] RECOVERY (25–29s)
-  - [ ] SESSION_END (30–34s)
-- [ ] Implement `scripts/generate_sample_video.py`
-- [ ] Generate video using ffmpeg
-- [ ] Overlay segment labels on screen
-- [ ] Overlay timestamp on video
-- [ ] Output to `input/fixtures/short_session_video.mp4`
-- [ ] Ensure deterministic output (same every run)
+- [x] Define fixed timeline for sample video (35 seconds total)
+- [x] Create segment plan:
+  - [x] SESSION_START (0–4s)
+  - [x] LOGIN_SCREEN (5–9s)
+  - [x] DASHBOARD (10–14s)
+  - [x] NAVIGATION (15–19s)
+  - [x] ERROR_POPUP (20–24s)
+  - [x] RECOVERY (25–29s)
+  - [x] SESSION_END (30–34s)
+- [x] Implement `scripts/generate_sample_video.py`
+- [x] Generate video using ffmpeg
+- [x] Overlay segment labels on screen
+- [x] Overlay timestamp on video
+- [x] Output to `input/fixtures/short_session_video.mp4`
+- [x] Ensure deterministic output (same every run)
 
 ---
 
 ### Sample Log Generation
-- [ ] Implement `scripts/generate_sample_log.py`
-- [ ] Define base timestamp for logs
-- [ ] Generate happy-path log (no errors)
-- [ ] Generate error-path log (includes ERROR event at ~20s)
-- [ ] Generate mixed/noisy log (DEBUG, malformed lines, duplicates)
-- [ ] Align log timestamps with sample video timeline
-- [ ] Output logs to:
-  - [ ] `input/fixtures/happy_path_log.txt`
-  - [ ] `input/fixtures/error_path_log.txt`
+- [x] Implement `scripts/generate_sample_log.py`
+- [x] Define base timestamp for logs
+- [x] Generate happy-path log (no errors)
+- [x] Generate error-path log (includes ERROR event at ~20s)
+- [x] Generate mixed/noisy log (DEBUG, malformed lines, duplicates)
+- [x] Align log timestamps with sample video timeline
+- [x] Output logs to:
+  - [x] `input/fixtures/happy_path_log.txt`
+  - [x] `input/fixtures/error_path_log.txt`
+  - [x] `input/fixtures/mixed_path_log.txt`
 
 ---
 
 ### Manual Event JSON Fixtures
-- [ ] Create canonical `input/events.manual.json` aligned to sample video
-- [ ] Create minimal valid JSON fixture
-- [ ] Create duration-event example
-- [ ] Create point-event example
-- [ ] Create mixed-event example
+- [x] Create canonical `input/events.manual.json` aligned to sample video
+- [x] Create minimal valid JSON fixture
+- [x] Create duration-event example
+- [x] Create point-event example
+- [x] Create mixed-event example
 
 ---
 
 ### Invalid JSON Fixtures (Validation Testing)
-- [ ] Missing label
-- [ ] Invalid time format
-- [ ] End before start
-- [ ] Overlapping events
-- [ ] Timestamp outside video duration
-- [ ] Duplicate labels
-- [ ] Filename collision scenario
+- [x] Missing label
+- [x] Invalid time format
+- [x] End before start
+- [x] Overlapping events
+- [x] Timestamp outside video duration
+- [x] Duplicate labels
+- [x] Filename collision scenario
 
 ---
 
 ### Fixture Quality Goals
-- [ ] All fixtures are deterministic
-- [ ] No sensitive or real-world data
-- [ ] Easy to visually verify correctness
-- [ ] Small enough for local testing
-- [ ] Representative of real QA scenarios
+- [x] All fixtures are deterministic
+- [x] No sensitive or real-world data
+- [x] Easy to visually verify correctness
+- [x] Small enough for local testing
+- [x] Representative of real QA scenarios
 
 ---
 
 ### Why This Matters (Document This)
-- [ ] Add explanation in README:
-  - [ ] Enables reproducible testing
-  - [ ] Avoids dependency on real recordings
-  - [ ] Improves CI reliability
-  - [ ] Demonstrates engineering discipline
+- [x] Add explanation in README:
+  - [x] Enables reproducible testing
+  - [x] Avoids dependency on real recordings
+  - [x] Improves CI reliability
+  - [x] Demonstrates engineering discipline
 
 ## Phase 4: Reporting and Usability
 - [ ] Add terminal summary report

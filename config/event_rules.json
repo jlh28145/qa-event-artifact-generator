@@ -21,12 +21,28 @@
       "severity": "WARNING"
     },
     {
-      "pattern": "START.*SESSION|SESSION START",
+      "pattern": "SESSION START|START SESSION",
       "label": "SESSION_START",
       "tags": [
         "session"
       ],
       "type": "point"
+    },
+    {
+      "pattern": "LOGIN SCREEN",
+      "label": "LOGIN_SCREEN",
+      "tags": [
+        "login"
+      ],
+      "type": "duration"
+    },
+    {
+      "pattern": "DASHBOARD",
+      "label": "DASHBOARD",
+      "tags": [
+        "dashboard"
+      ],
+      "type": "duration"
     }
   ]
 }

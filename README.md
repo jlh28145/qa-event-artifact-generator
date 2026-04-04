@@ -91,6 +91,20 @@ Example metadata structure:
 }
 ```
 
+## Sample Generation
+Generate sample logs and event JSON fixtures:
+
+This project includes deterministic fixture generation scripts so sample data can be recreated reliably across environments. The generated fixtures are intended for local testing and demonstration without relying on sensitive or proprietary footage.
+
+```bash
+python scripts/generate_sample_log.py --output-dir input/fixtures
+```
+
+Generate a sample video with ffmpeg:
+```bash
+python scripts/generate_sample_video.py --output input/fixtures/short_session_video.mp4
+```
+
 ## Development
 Run tests with:
 ```bash

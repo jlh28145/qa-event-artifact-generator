@@ -2,23 +2,12 @@
   "events": [
     {
       "label": "SESSION_START",
-      "start": "00:00",
-      "end": "00:04"
+      "timestamp": "00:00"
     },
     {
       "label": "LOGIN_SCREEN",
       "start": "00:05",
       "end": "00:09"
-    },
-    {
-      "label": "DASHBOARD",
-      "start": "00:10",
-      "end": "00:14"
-    },
-    {
-      "label": "NAVIGATION",
-      "start": "00:15",
-      "end": "00:19"
     },
     {
       "label": "ERROR_POPUP",

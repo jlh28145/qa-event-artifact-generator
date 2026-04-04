@@ -1,0 +1,11 @@
+{
+  "events": [
+    {
+      "label": "ERROR_POPUP",
+      "timestamp": "00:20",
+      "pre_buffer": "00:02",
+      "post_buffer": "00:03",
+      "notes": "Example point event"
+    }
+  ]
+}
