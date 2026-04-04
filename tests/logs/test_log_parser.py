@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from qa_event_artifact_generator.logs.log_parser import load_log_lines
 
 

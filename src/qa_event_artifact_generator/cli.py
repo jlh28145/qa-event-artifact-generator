@@ -1,12 +1,11 @@
 import argparse
-import json
 import sys
 from pathlib import Path
 
 from qa_event_artifact_generator.events.event_json_writer import write_events_json
 from qa_event_artifact_generator.events.manual_event_loader import EventLoadingError, load_manual_events
 from qa_event_artifact_generator.logs.event_extractor import LogExtractionError, extract_events_from_log, load_event_rules
-from qa_event_artifact_generator.logs.log_parser import LogLine, load_log_lines
+from qa_event_artifact_generator.logs.log_parser import load_log_lines
 from qa_event_artifact_generator.logs.time_sync import correlate_log_events
 from qa_event_artifact_generator.reporting.summary import detailed_summary, generate_html_report, summary_message
 from qa_event_artifact_generator.segmentation.ffmpeg_wrapper import FFmpegError, FFmpegWrapper

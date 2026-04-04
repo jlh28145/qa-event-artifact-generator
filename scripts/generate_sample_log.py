@@ -47,7 +47,6 @@ def main() -> int:
     ]
 
     def timestamped(entries):
-        base = args.base_time
         times = [
             '2026-04-04T12:00:00',
             '2026-04-04T12:00:05',

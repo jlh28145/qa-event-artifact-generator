@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from pathlib import Path
-from typing import List, Tuple
+from typing import List
 
 from qa_event_artifact_generator.logs.event_extractor import ExtractedLogEvent
 from qa_event_artifact_generator.models import PointEvent, parse_time

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, List
 
 from qa_event_artifact_generator.models import DurationEvent, Event, PointEvent, parse_time
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import List, Optional
+from typing import List
 
 from qa_event_artifact_generator.models import Event
 from qa_event_artifact_generator.segmentation.ffmpeg_wrapper import FFmpegWrapper

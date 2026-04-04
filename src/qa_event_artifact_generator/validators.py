@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List, Tuple
+from typing import Iterable, List
 
 from qa_event_artifact_generator.models import DurationEvent, Event, PointEvent
 from qa_event_artifact_generator.utils import safe_filename

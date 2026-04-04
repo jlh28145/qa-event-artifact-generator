@@ -1,4 +1,4 @@
-from qa_event_artifact_generator.models import DurationEvent, PointEvent
+from qa_event_artifact_generator.models import DurationEvent
 from qa_event_artifact_generator.validators import validate_events
 
 

@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 from qa_event_artifact_generator.events.event_json_writer import write_events_json
 from qa_event_artifact_generator.models import DurationEvent

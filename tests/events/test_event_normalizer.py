@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from qa_event_artifact_generator.events.event_normalizer import normalize_event
 from qa_event_artifact_generator.models import DurationEvent, PointEvent
 

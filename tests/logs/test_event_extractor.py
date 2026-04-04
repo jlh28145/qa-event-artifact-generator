@@ -1,4 +1,4 @@
-from qa_event_artifact_generator.logs.event_extractor import extract_events_from_log, load_event_rules
+from qa_event_artifact_generator.logs.event_extractor import extract_events_from_log
 from qa_event_artifact_generator.logs.log_parser import LogLine
 
 

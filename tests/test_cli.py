@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 from qa_event_artifact_generator.cli import main, parse_args
 

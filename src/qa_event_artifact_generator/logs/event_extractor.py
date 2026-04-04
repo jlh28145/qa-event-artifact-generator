@@ -4,10 +4,10 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List
+from typing import Any, Iterable, List
 
 from qa_event_artifact_generator.logs.log_parser import LogLine
-from qa_event_artifact_generator.models import PointEvent, parse_time
+from qa_event_artifact_generator.models import parse_time
 
 
 @dataclass
