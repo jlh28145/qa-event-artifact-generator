@@ -60,7 +60,9 @@ class DurationEvent(Event):
     start: float = 0.0
     end: float = 0.0
 
-    def clip_start_end(self, video_duration: float | None = None) -> tuple[float, float]:
+    def clip_start_end(
+        self, video_duration: float | None = None
+    ) -> tuple[float, float]:
         start = max(0.0, self.start - self.pre_buffer)
         end = self.end + self.post_buffer
         if video_duration is not None:
@@ -78,7 +80,9 @@ class DurationEvent(Event):
 class PointEvent(Event):
     timestamp: float = 0.0
 
-    def clip_start_end(self, video_duration: float | None = None) -> tuple[float, float]:
+    def clip_start_end(
+        self, video_duration: float | None = None
+    ) -> tuple[float, float]:
         start = max(0.0, self.timestamp - self.pre_buffer)
         end = self.timestamp + self.post_buffer
         if video_duration is not None:

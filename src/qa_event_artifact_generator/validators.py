@@ -13,7 +13,9 @@ def validate_event_label(label: str) -> tuple[bool, str]:
     return True, sanitized
 
 
-def validate_events(events: Iterable[Event], video_duration: float | None = None) -> tuple[List[str], List[str]]:
+def validate_events(
+    events: Iterable[Event], video_duration: float | None = None
+) -> tuple[List[str], List[str]]:
     errors: List[str] = []
     warnings: List[str] = []
     intervals: List[tuple[float, float, str]] = []
@@ -44,7 +46,9 @@ def validate_events(events: Iterable[Event], video_duration: float | None = None
 
         if video_duration is not None:
             if start < 0 or end < 0:
-                errors.append(f"Event {index} '{event.label}' contains negative time values.")
+                errors.append(
+                    f"Event {index} '{event.label}' contains negative time values."
+                )
             if start > video_duration or end > video_duration:
                 warnings.append(
                     f"Event {index} '{event.label}' falls outside video duration ({video_duration:.2f}s)."
@@ -66,8 +70,6 @@ def validate_events(events: Iterable[Event], video_duration: float | None = None
             start_a, end_a, label_a = intervals[i]
             start_b, end_b, label_b = intervals[j]
             if start_b < end_a and start_a < end_b:
-                warnings.append(
-                    f"Event '{label_a}' overlaps with '{label_b}'."
-                )
+                warnings.append(f"Event '{label_a}' overlaps with '{label_b}'.")
 
     return errors, warnings

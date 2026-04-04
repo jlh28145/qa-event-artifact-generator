@@ -8,7 +8,7 @@ def test_extract_events_from_log_matches_rules():
         "default_post_buffer": "00:02",
         "rules": [
             {"pattern": "ERROR", "label": "ERROR", "tags": ["error"], "type": "point"}
-        ]
+        ],
     }
     lines = [LogLine(timestamp=1.0, message="ERROR failed", raw="ERROR failed")]
     events, warnings = extract_events_from_log(lines, rules)

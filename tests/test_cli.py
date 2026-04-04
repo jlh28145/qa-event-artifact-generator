@@ -4,14 +4,16 @@ from qa_event_artifact_generator.cli import main, parse_args
 
 
 def test_parse_args():
-    args = parse_args([
-        "--video",
-        "video.mp4",
-        "--events",
-        "events.json",
-        "--output",
-        "output",
-    ])
+    args = parse_args(
+        [
+            "--video",
+            "video.mp4",
+            "--events",
+            "events.json",
+            "--output",
+            "output",
+        ]
+    )
     assert args.video == "video.mp4"
     assert args.events == "events.json"
     assert args.output == "output"
@@ -72,11 +74,23 @@ def test_main_log_mode_generates_events(tmp_path, monkeypatch):
     rules = tmp_path / "rules.json"
     video.write_text("dummy video")
     log.write_text("2026-04-04T12:00:05 ERROR failed\n", encoding="utf-8")
-    rules.write_text(json.dumps({
-        "default_pre_buffer": "00:01",
-        "default_post_buffer": "00:01",
-        "rules": [{"pattern": "ERROR", "label": "ERROR", "tags": ["error"], "type": "point"}]
-    }), encoding="utf-8")
+    rules.write_text(
+        json.dumps(
+            {
+                "default_pre_buffer": "00:01",
+                "default_post_buffer": "00:01",
+                "rules": [
+                    {
+                        "pattern": "ERROR",
+                        "label": "ERROR",
+                        "tags": ["error"],
+                        "type": "point",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
 
     class DummyFFmpeg:
         def __init__(self):

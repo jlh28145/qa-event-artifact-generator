@@ -8,35 +8,47 @@ from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Convert CSV file to events JSON format.')
-    parser.add_argument('--csv', required=True, help='Path to input CSV file.')
-    parser.add_argument('--output', required=True, help='Path to output JSON file.')
-    parser.add_argument('--label-column', default='label', help='Column name for event label.')
-    parser.add_argument('--start-column', default='start', help='Column name for start time.')
-    parser.add_argument('--end-column', help='Column name for end time (optional for point events).')
-    parser.add_argument('--timestamp-column', help='Column name for timestamp (for point events).')
-    parser.add_argument('--notes-column', help='Column name for notes.')
-    parser.add_argument('--tags-column', help='Column name for tags (comma-separated).')
+    parser = argparse.ArgumentParser(
+        description="Convert CSV file to events JSON format."
+    )
+    parser.add_argument("--csv", required=True, help="Path to input CSV file.")
+    parser.add_argument("--output", required=True, help="Path to output JSON file.")
+    parser.add_argument(
+        "--label-column", default="label", help="Column name for event label."
+    )
+    parser.add_argument(
+        "--start-column", default="start", help="Column name for start time."
+    )
+    parser.add_argument(
+        "--end-column", help="Column name for end time (optional for point events)."
+    )
+    parser.add_argument(
+        "--timestamp-column", help="Column name for timestamp (for point events)."
+    )
+    parser.add_argument("--notes-column", help="Column name for notes.")
+    parser.add_argument("--tags-column", help="Column name for tags (comma-separated).")
     return parser.parse_args()
 
 
 def csv_to_events(csv_path: Path, args) -> list[dict]:
     events = []
-    with open(csv_path, 'r', encoding='utf-8') as f:
+    with open(csv_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             event = {}
             if args.label_column in row:
-                event['label'] = row[args.label_column].strip()
+                event["label"] = row[args.label_column].strip()
             if args.start_column in row and args.end_column in row:
-                event['start'] = row[args.start_column].strip()
-                event['end'] = row[args.end_column].strip()
+                event["start"] = row[args.start_column].strip()
+                event["end"] = row[args.end_column].strip()
             elif args.timestamp_column in row:
-                event['timestamp'] = row[args.timestamp_column].strip()
+                event["timestamp"] = row[args.timestamp_column].strip()
             if args.notes_column in row and row[args.notes_column].strip():
-                event['notes'] = row[args.notes_column].strip()
+                event["notes"] = row[args.notes_column].strip()
             if args.tags_column in row and row[args.tags_column].strip():
-                event['tags'] = [tag.strip() for tag in row[args.tags_column].split(',')]
+                event["tags"] = [
+                    tag.strip() for tag in row[args.tags_column].split(",")
+                ]
             if event:
                 events.append(event)
     return events
@@ -53,11 +65,12 @@ def main() -> int:
 
     events = csv_to_events(csv_path, args)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps({'events': events}, indent=2), encoding='utf-8')
+    output_path.write_text(json.dumps({"events": events}, indent=2), encoding="utf-8")
     print(f"Converted {len(events)} events to {output_path}")
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
+
     raise SystemExit(main())

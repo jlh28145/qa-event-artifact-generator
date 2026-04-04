@@ -4,7 +4,12 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List
 
-from qa_event_artifact_generator.models import DurationEvent, Event, PointEvent, parse_time
+from qa_event_artifact_generator.models import (
+    DurationEvent,
+    Event,
+    PointEvent,
+    parse_time,
+)
 
 
 class EventLoadingError(ValueError):
@@ -30,7 +35,9 @@ def _load_event(data: Dict[str, Any], defaults: Dict[str, float]) -> Event:
         raise EventLoadingError("Event tags must be a list if provided.")
 
     pre_buffer = _parse_buffer(data.get("pre_buffer", defaults.get("pre_buffer", 0.0)))
-    post_buffer = _parse_buffer(data.get("post_buffer", defaults.get("post_buffer", 0.0)))
+    post_buffer = _parse_buffer(
+        data.get("post_buffer", defaults.get("post_buffer", 0.0))
+    )
 
     if "start" in data or "end" in data:
         if "start" not in data or "end" not in data:
@@ -74,12 +81,16 @@ def load_manual_events(path: Path) -> List[Event]:
         }
         event_data = payload.get("events")
         if event_data is None:
-            raise EventLoadingError("Top-level JSON object must contain an 'events' list.")
+            raise EventLoadingError(
+                "Top-level JSON object must contain an 'events' list."
+            )
     elif isinstance(payload, list):
         defaults = {"pre_buffer": 0.0, "post_buffer": 0.0}
         event_data = payload
     else:
-        raise EventLoadingError("Event JSON must be a list or an object containing an 'events' list.")
+        raise EventLoadingError(
+            "Event JSON must be a list or an object containing an 'events' list."
+        )
 
     if not isinstance(event_data, list):
         raise EventLoadingError("The 'events' field must be a list of event objects.")

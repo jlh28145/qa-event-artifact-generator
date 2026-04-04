@@ -14,7 +14,12 @@ def test_phase1_smoke_end_to_end(tmp_path, monkeypatch):
         json.dumps(
             [
                 {"label": "LOGIN_SCREEN", "start": "00:00", "end": "00:05"},
-                {"label": "ERROR_POPUP", "timestamp": "00:10", "pre_buffer": "00:01", "post_buffer": "00:02"},
+                {
+                    "label": "ERROR_POPUP",
+                    "timestamp": "00:10",
+                    "pre_buffer": "00:01",
+                    "post_buffer": "00:02",
+                },
             ]
         ),
         encoding="utf-8",
@@ -28,7 +33,9 @@ def test_phase1_smoke_end_to_end(tmp_path, monkeypatch):
             assert video_path == video
             return 15.0
 
-        def build_segment_command(self, source_video: Path, output_clip: Path, start: float, end: float):
+        def build_segment_command(
+            self, source_video: Path, output_clip: Path, start: float, end: float
+        ):
             assert source_video == video
             assert output_clip.parent == output_dir
             assert start >= 0

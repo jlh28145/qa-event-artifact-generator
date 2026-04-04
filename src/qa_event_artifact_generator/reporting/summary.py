@@ -30,11 +30,15 @@ def detailed_summary(
     output_path: Path,
 ) -> str:
     total_events = len(events)
-    duration_events = sum(1 for e in events if e.start is not None and e.end is not None)
+    duration_events = sum(
+        1 for e in events if e.start is not None and e.end is not None
+    )
     point_events = total_events - duration_events
     successful_clips = len(clip_records)
     failed_clips = total_events - successful_clips
-    total_warnings = len(event_warnings) + len(validation_warnings) + len(segment_warnings)
+    total_warnings = (
+        len(event_warnings) + len(validation_warnings) + len(segment_warnings)
+    )
 
     summary = [
         "\nProcessing Summary:",
@@ -104,4 +108,4 @@ def generate_html_report(
 </body>
 </html>
 """
-    html_path.write_text(html_content, encoding='utf-8')
+    html_path.write_text(html_content, encoding="utf-8")

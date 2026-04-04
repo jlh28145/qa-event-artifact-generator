@@ -38,7 +38,9 @@ def _parse_buffer(value: Any) -> float:
     return parse_time(value)
 
 
-def extract_events_from_log(lines: Iterable[LogLine], rules_config: dict[str, Any]) -> tuple[List[ExtractedLogEvent], List[str]]:
+def extract_events_from_log(
+    lines: Iterable[LogLine], rules_config: dict[str, Any]
+) -> tuple[List[ExtractedLogEvent], List[str]]:
     events: List[ExtractedLogEvent] = []
     warnings: List[str] = []
     default_pre_buffer = _parse_buffer(rules_config.get("default_pre_buffer", 0.0))
@@ -55,8 +57,12 @@ def extract_events_from_log(lines: Iterable[LogLine], rules_config: dict[str, An
                     ExtractedLogEvent(
                         label=rule.get("label", "UNNAMED_EVENT"),
                         timestamp=line.timestamp,
-                        pre_buffer=_parse_buffer(rule.get("pre_buffer", default_pre_buffer)),
-                        post_buffer=_parse_buffer(rule.get("post_buffer", default_post_buffer)),
+                        pre_buffer=_parse_buffer(
+                            rule.get("pre_buffer", default_pre_buffer)
+                        ),
+                        post_buffer=_parse_buffer(
+                            rule.get("post_buffer", default_post_buffer)
+                        ),
                         notes=rule.get("notes"),
                         tags=rule.get("tags", []),
                         raw={"message": line.message, "raw": line.raw},

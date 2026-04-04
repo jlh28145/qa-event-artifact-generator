@@ -9,7 +9,12 @@ from qa_event_artifact_generator.models import PointEvent, parse_time
 
 def parse_recording_start(value: str) -> datetime | float:
     value = value.strip()
-    for fmt in ("%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S", "%H:%M:%S"):
+    for fmt in (
+        "%Y-%m-%dT%H:%M:%S.%f",
+        "%Y-%m-%dT%H:%M:%S",
+        "%Y-%m-%d %H:%M:%S",
+        "%H:%M:%S",
+    ):
         try:
             if fmt == "%H:%M:%S":
                 return parse_time(value)

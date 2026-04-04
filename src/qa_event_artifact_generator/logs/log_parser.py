@@ -5,9 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import List
 
-LOG_LINE_PATTERN = re.compile(
-    r"^\s*\[?(?P<timestamp>[^\]]+?)\]?\s+(?P<message>.*)$"
-)
+LOG_LINE_PATTERN = re.compile(r"^\s*\[?(?P<timestamp>[^\]]+?)\]?\s+(?P<message>.*)$")
 
 
 class LogLine:
@@ -47,13 +45,19 @@ def parse_log_line(line: str) -> LogLine:
         timestamp = parse_timestamp(timestamp_value)
     except ValueError as exc:
         raise ValueError(f"Invalid timestamp '{timestamp_value}': {exc}") from exc
-    return LogLine(timestamp=timestamp, message=match.group("message").strip(), raw=line.rstrip("\n"))
+    return LogLine(
+        timestamp=timestamp,
+        message=match.group("message").strip(),
+        raw=line.rstrip("\n"),
+    )
 
 
 def load_log_lines(path: Path) -> tuple[List[LogLine], List[str]]:
     lines: List[LogLine] = []
     warnings: List[str] = []
-    for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+    for line_number, raw_line in enumerate(
+        path.read_text(encoding="utf-8").splitlines(), start=1
+    ):
         if not raw_line.strip():
             continue
         try:

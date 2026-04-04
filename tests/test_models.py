@@ -14,7 +14,9 @@ def test_parse_time_with_hours():
 
 
 def test_duration_event_clip_range():
-    event = DurationEvent(label="demo", start=10.0, end=20.0, pre_buffer=2.0, post_buffer=3.0)
+    event = DurationEvent(
+        label="demo", start=10.0, end=20.0, pre_buffer=2.0, post_buffer=3.0
+    )
     assert event.clip_start_end() == (8.0, 23.0)
 
 

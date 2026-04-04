@@ -12,9 +12,19 @@ def parse_args() -> argparse.Namespace:
         description="Generate a starter manual events JSON file."
     )
     parser.add_argument("--output", required=True, help="Path to write the JSON file.")
-    parser.add_argument("--count", type=int, default=3, help="Number of placeholder events.")
-    parser.add_argument("--default-pre-buffer", default="00:01", help="Default pre-buffer for generated events.")
-    parser.add_argument("--default-post-buffer", default="00:02", help="Default post-buffer for generated events.")
+    parser.add_argument(
+        "--count", type=int, default=3, help="Number of placeholder events."
+    )
+    parser.add_argument(
+        "--default-pre-buffer",
+        default="00:01",
+        help="Default pre-buffer for generated events.",
+    )
+    parser.add_argument(
+        "--default-post-buffer",
+        default="00:02",
+        help="Default post-buffer for generated events.",
+    )
     return parser.parse_args()
 
 
@@ -24,8 +34,8 @@ def build_template(count: int, pre_buffer: str, post_buffer: str) -> dict[str, A
         "default_post_buffer": post_buffer,
         "events": [
             {
-                "label": f"EVENT_{index+1}",
-                "timestamp": f"00:{index*5:02d}",
+                "label": f"EVENT_{index + 1}",
+                "timestamp": f"00:{index * 5:02d}",
                 "notes": "Replace this placeholder with a real event.",
                 "tags": [],
             }
@@ -39,7 +49,12 @@ def main() -> int:
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(
-        json.dumps(build_template(args.count, args.default_pre_buffer, args.default_post_buffer), indent=2),
+        json.dumps(
+            build_template(
+                args.count, args.default_pre_buffer, args.default_post_buffer
+            ),
+            indent=2,
+        ),
         encoding="utf-8",
     )
     print(f"Wrote manual event template to {output_path}")
