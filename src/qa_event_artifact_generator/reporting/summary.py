@@ -31,7 +31,7 @@ def detailed_summary(
 ) -> str:
     total_events = len(events)
     duration_events = sum(
-        1 for e in events if e.start is not None and e.end is not None
+        1 for e in events if hasattr(e, 'start') and hasattr(e, 'end')
     )
     point_events = total_events - duration_events
     successful_clips = len(clip_records)
