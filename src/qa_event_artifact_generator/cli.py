@@ -77,6 +77,9 @@ def parse_args(argv=None):
         help="Analyze log file and suggest events without generating clips.",
     )
     return parser.parse_args(argv)
+
+
+def validate_path(path: Path, must_exist: bool = True) -> Path:
     if must_exist and not path.exists():
         raise FileNotFoundError(f"Path does not exist: {path}")
     return path
