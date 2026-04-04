@@ -185,8 +185,8 @@ pytest
 ## Future Roadmap
 - CSV-to-JSON event import helpers
 - Configurable clipping profiles by event type
-- Enhanced HTML dashboard with video previews
-- Traceability links for test case/bug report integration
+- (Deferred) Enhanced HTML dashboard with video previews
+- (Deferred) Traceability links for test case/bug report integration
 - Advanced log correlation with multiple time sources
 - Semi-automated event capture workflows
 - PyPI packaging and distribution
