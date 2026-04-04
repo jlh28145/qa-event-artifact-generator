@@ -313,8 +313,8 @@ Create deterministic, reusable test assets so the project can be tested and demo
 - [x] Configurable clipping profiles by event type
 - [Deferred] HTML dashboard/report
 - [Deferred] Traceability links for test case / bug report integration
-- [ ] More advanced log correlation
-- [ ] Semi-automated event capture workflow
+- [x] More advanced log correlation
+- [x] Semi-automated event capture workflow
 - [x] Optional packaging / PyPI readiness
 - [x] GitHub Actions CI pipeline
 

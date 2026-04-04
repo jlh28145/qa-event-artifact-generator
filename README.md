@@ -116,6 +116,12 @@ qa-event-artifact-generator \
   --generate-events output/generated_events.json \
   --output output/ \
   --html-report output/report.html
+
+# Suggest events from log without processing
+qa-event-artifact-generator \
+  --log input/sample_log.txt \
+  --event-rules config/event_rules.json \
+  --suggest-events
 ```
 
 ## Sample Output
@@ -192,8 +198,8 @@ pytest
 - Configurable clipping profiles by event type ✓
 - (Deferred) Enhanced HTML dashboard with video previews
 - (Deferred) Traceability links for test case/bug report integration
-- Advanced log correlation with multiple time sources
-- Semi-automated event capture workflows
+- Advanced log correlation with multiple time sources ✓
+- Semi-automated event capture workflows ✓
 - PyPI packaging and distribution ✓
 - GitHub Actions CI/CD pipeline ✓
 

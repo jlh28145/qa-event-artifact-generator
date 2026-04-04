@@ -58,6 +58,11 @@ def parse_args(argv=None):
         "--html-report",
         help="Optional path to write an HTML summary report.",
     )
+    parser.add_argument(
+        "--suggest-events",
+        action="store_true",
+        help="Analyze log file and suggest events without generating clips.",
+    )
 
 
 def validate_path(path: Path, must_exist: bool = True) -> Path:
@@ -73,13 +78,16 @@ def load_events(args, video_duration: float | None):
         events = load_manual_events(validate_path(Path(args.events)))
         return events, args.events, None, []
     if args.log:
-        if not args.recording_start:
-            raise ValueError("--recording-start is required when using --log.")
+        if not args.recording_start and not args.suggest_events:
+            raise ValueError("--recording-start is required when using --log (unless --suggest-events).")
         log_path = validate_path(Path(args.log))
         rules_path = validate_path(Path(args.event_rules))
         lines, parse_warnings = load_log_lines(log_path)
         rules = load_event_rules(rules_path)
         extracted_events, extract_warnings = extract_events_from_log(lines, rules)
+        if args.suggest_events:
+            # For suggestions, return extracted events without correlation
+            return extracted_events, args.log, None, parse_warnings + extract_warnings
         synced_events, sync_warnings = correlate_log_events(
             extracted_events, args.recording_start, video_duration=video_duration
         )
@@ -111,6 +119,15 @@ def main(argv=None) -> int:
             for error in errors:
                 print(f"ERROR: {error}", file=sys.stderr)
             return 1
+
+        if args.suggest_events:
+            print("\nSuggested Events:")
+            for event in events:
+                if hasattr(event, 'timestamp'):
+                    print(f"  {event.label}: {event.timestamp}")
+                else:
+                    print(f"  {event.label}: {getattr(event, 'start', 'N/A')} - {getattr(event, 'end', 'N/A')}")
+            return 0
 
         if args.generate_events and args.log:
             write_events_json(events, generated_events_path, defaults={
