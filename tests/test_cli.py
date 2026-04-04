@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from qa_event_artifact_generator.cli import FFmpegWrapper, main, parse_args
+from qa_event_artifact_generator.cli import main, parse_args
 
 
 def test_parse_args():
@@ -56,6 +56,50 @@ def test_main_validates_paths_and_creates_output_directory(tmp_path, monkeypatch
             str(video),
             "--events",
             str(events),
+            "--output",
+            str(output_dir),
+            "--dry-run",
+        ]
+    )
+
+    assert result == 0
+    assert output_dir.exists()
+    assert output_dir.is_dir()
+
+
+def test_main_log_mode_generates_events(tmp_path, monkeypatch):
+    video = tmp_path / "video.mp4"
+    log = tmp_path / "test.log"
+    rules = tmp_path / "rules.json"
+    video.write_text("dummy video")
+    log.write_text("2026-04-04T12:00:05 ERROR failed
+", encoding="utf-8")
+    rules.write_text(json.dumps({
+        "default_pre_buffer": "00:01",
+        "default_post_buffer": "00:01",
+        "rules": [{"pattern": "ERROR", "label": "ERROR", "tags": ["error"], "type": "point"}]
+    }), encoding="utf-8")
+
+    class DummyFFmpeg:
+        def __init__(self):
+            pass
+
+        def get_video_duration(self, _):
+            return 20.0
+
+    monkeypatch.setattr("qa_event_artifact_generator.cli.FFmpegWrapper", DummyFFmpeg)
+
+    output_dir = tmp_path / "output"
+    result = main(
+        [
+            "--video",
+            str(video),
+            "--log",
+            str(log),
+            "--recording-start",
+            "2026-04-04T12:00:00",
+            "--event-rules",
+            str(rules),
             "--output",
             str(output_dir),
             "--dry-run",

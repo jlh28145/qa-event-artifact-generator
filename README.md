@@ -2,8 +2,8 @@
 
 A Python CLI tool that converts long test recordings into event-based video clips with structured metadata for faster debugging and QA workflows.
 
-## Phase 0 Completed, Phase 1 In Progress
-This repository is currently developed on the `dev` branch. Phase 1 adds manual event segmentation, validation, and metadata generation.
+## Phase 0-1 Completed, Phase 1.5 and Phase 2 In Progress
+This repository is currently developed on the `dev` branch. Phase 1 supports manual event segmentation, while Phase 1.5 adds event schema tooling and Phase 2 adds log-driven event generation.
 
 ## Requirements
 - Python 3.10+
@@ -49,6 +49,17 @@ qa-event-artifact-generator --video path/to/video.mp4 --events path/to/events.ma
 To generate clips and metadata:
 ```bash
 qa-event-artifact-generator --video path/to/video.mp4 --events path/to/events.manual.json --output output/
+```
+
+To generate clips from a log file with automatic event extraction:
+```bash
+qa-event-artifact-generator \
+  --video path/to/video.mp4 \
+  --log path/to/events.log \
+  --recording-start 2026-04-04T12:00:00 \
+  --event-rules config/event_rules.json \
+  --generate-events output/generated_events.json \
+  --output output/
 ```
 
 ## Sample Output

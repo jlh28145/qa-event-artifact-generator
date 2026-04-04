@@ -1,0 +1,32 @@
+{
+  "default_pre_buffer": "00:01",
+  "default_post_buffer": "00:02",
+  "rules": [
+    {
+      "pattern": "ERROR",
+      "label": "ERROR",
+      "tags": [
+        "error"
+      ],
+      "type": "point",
+      "severity": "ERROR"
+    },
+    {
+      "pattern": "WARN|WARNING",
+      "label": "WARNING",
+      "tags": [
+        "warning"
+      ],
+      "type": "point",
+      "severity": "WARNING"
+    },
+    {
+      "pattern": "START.*SESSION|SESSION START",
+      "label": "SESSION_START",
+      "tags": [
+        "session"
+      ],
+      "type": "point"
+    }
+  ]
+}

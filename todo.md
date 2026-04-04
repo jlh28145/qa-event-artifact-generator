@@ -124,27 +124,27 @@ Success criteria:
 
 ## Phase 1.5: Input JSON Generation
 ### Schema and Authoring
-- [ ] Define official `events.manual.json` schema
-- [ ] Document required vs optional fields
-- [ ] Add JSON example templates
-- [ ] Document duration-event vs point-event rules
-- [ ] Add schema examples in `docs/event-schema.md`
+- [x] Define official `events.manual.json` schema
+- [x] Document required vs optional fields
+- [x] Add JSON example templates
+- [x] Document duration-event vs point-event rules
+- [x] Add schema examples in `docs/event-schema.md`
 
 ### JSON Generation Helpers
-- [ ] Create `scripts/generate_manual_events_json.py`
+- [x] Create `scripts/generate_manual_events_json.py`
 - [ ] Allow generating starter JSON from a video path
-- [ ] Auto-fill source video path in template
-- [ ] Add support for creating numbered placeholder events
-- [ ] Add support for generating empty notes/tags fields
-- [ ] Add support for global default buffers in template
+- [x] Auto-fill source video path in template
+- [x] Add support for creating numbered placeholder events
+- [x] Add support for generating empty notes/tags fields
+- [x] Add support for global default buffers in template
 
 ### Validation UX
-- [ ] Add `--dry-run` validation mode
-- [ ] Print clear validation errors
-- [ ] Warn on overlapping events
-- [ ] Fail clearly on out-of-range timestamps
-- [ ] Warn on duplicate labels
-- [ ] Warn on filenames that would collide after sanitizing
+- [x] Add `--dry-run` validation mode
+- [x] Print clear validation errors
+- [x] Warn on overlapping events
+- [x] Fail clearly on out-of-range timestamps
+- [x] Warn on duplicate labels
+- [x] Warn on filenames that would collide after sanitizing
 
 ### Possible Future Input Helpers
 - [ ] Consider CSV-to-JSON helper
@@ -155,45 +155,45 @@ Success criteria:
 
 ## Phase 2: Log-Driven Event Generation
 ### Log Input
-- [ ] Add `--log` argument
-- [ ] Add `--recording-start` argument
-- [ ] Add `--event-rules` argument
-- [ ] Support text log input format first
-- [ ] Document supported log format assumptions
+- [x] Add `--log` argument
+- [x] Add `--recording-start` argument
+- [x] Add `--event-rules` argument
+- [x] Support text log input format first
+- [x] Document supported log format assumptions
 
 ### Parsing
-- [ ] Implement raw log reader
-- [ ] Parse timestamped log lines
-- [ ] Normalize timestamps into internal model
-- [ ] Support malformed-line handling
-- [ ] Add parser warnings for unreadable lines
+- [x] Implement raw log reader
+- [x] Parse timestamped log lines
+- [x] Normalize timestamps into internal model
+- [x] Support malformed-line handling
+- [x] Add parser warnings for unreadable lines
 
 ### Event Extraction
-- [ ] Define event extraction rules
-- [ ] Create `config/event_rules.json`
-- [ ] Support regex-based event extraction
-- [ ] Support severity-based events like ERROR and WARNING
-- [ ] Support domain-specific markers like START and END
-- [ ] Generate normalized event list from logs
+- [x] Define event extraction rules
+- [x] Create `config/event_rules.json`
+- [x] Support regex-based event extraction
+- [x] Support severity-based events like ERROR and WARNING
+- [x] Support domain-specific markers like START and END
+- [x] Generate normalized event list from logs
 
 ### Time Correlation
-- [ ] Convert log timestamps to video offsets
-- [ ] Support configurable default buffers around point events
-- [ ] Warn on negative offsets
-- [ ] Warn on offsets beyond video duration
-- [ ] Document time-alignment assumptions
+- [x] Convert log timestamps to video offsets
+- [x] Support configurable default buffers around point events
+- [x] Warn on negative offsets
+- [x] Warn on offsets beyond video duration
+- [x] Document time-alignment assumptions
 
 ### Outputs
-- [ ] Generate `generated_events.json`
-- [ ] Feed generated events into segmentation flow
-- [ ] Include correlation details in `metadata.json`
-- [ ] Add source-log reference to metadata
+- [x] Generate `generated_events.json`
+- [x] Feed generated events into segmentation flow
+- [x] Include correlation details in `metadata.json`
+- [x] Add source-log reference to metadata
 
 ### Testing
-- [ ] Add tests for event extraction
-- [ ] Add tests for time sync
-- [ ] Add malformed-log handling tests
-- [ ] Add end-to-end test for log -> events -> clips flow
+- [x] Add tests for event extraction
+- [x] Add tests for time sync
+- [x] Add malformed-log handling tests
+- [x] Add end-to-end test for log -> events -> clips flow
 
 ---
 
