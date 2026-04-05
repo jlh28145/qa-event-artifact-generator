@@ -11,6 +11,6 @@
       ]
     }
   ],
-  "source_log": "input/fixtures/error_path_log.txt",
+  "source_log": "tmp_fixture_check/error_path_log.txt",
   "recording_start": "2026-04-04T12:00:00"
 }

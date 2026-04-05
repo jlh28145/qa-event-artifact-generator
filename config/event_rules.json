@@ -1,0 +1,52 @@
+{
+  "default_pre_buffer": "00:01",
+  "default_post_buffer": "00:02",
+  "time_sources": {
+    "log1": {"offset_seconds": 0},
+    "log2": {"offset_seconds": 3600}
+  },
+  "rules": [
+    {
+      "pattern": "ERROR",
+      "label": "ERROR",
+      "tags": [
+        "error"
+      ],
+      "type": "point",
+      "severity": "ERROR"
+    },
+    {
+      "pattern": "WARN|WARNING",
+      "label": "WARNING",
+      "tags": [
+        "warning"
+      ],
+      "type": "point",
+      "severity": "WARNING"
+    },
+    {
+      "pattern": "SESSION START|START SESSION",
+      "label": "SESSION_START",
+      "tags": [
+        "session"
+      ],
+      "type": "point"
+    },
+    {
+      "pattern": "LOGIN SCREEN",
+      "label": "LOGIN_SCREEN",
+      "tags": [
+        "login"
+      ],
+      "type": "duration"
+    },
+    {
+      "pattern": "DASHBOARD",
+      "label": "DASHBOARD",
+      "tags": [
+        "dashboard"
+      ],
+      "type": "duration"
+    }
+  ]
+}

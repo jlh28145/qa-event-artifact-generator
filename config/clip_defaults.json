@@ -1,0 +1,14 @@
+{
+  "default_pre_buffer": "00:01",
+  "default_post_buffer": "00:02",
+  "profiles": {
+    "error": {
+      "pre_buffer": "00:05",
+      "post_buffer": "00:05"
+    },
+    "login": {
+      "pre_buffer": "00:02",
+      "post_buffer": "00:03"
+    }
+  }
+}

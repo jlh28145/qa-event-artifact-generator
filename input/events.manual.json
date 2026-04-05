@@ -1,0 +1,71 @@
+{
+  "default_pre_buffer": "00:01",
+  "default_post_buffer": "00:02",
+  "events": [
+    {
+      "label": "SESSION_START",
+      "start": "00:00",
+      "end": "00:04",
+      "notes": "Outline the session start segment",
+      "tags": [
+        "session"
+      ]
+    },
+    {
+      "label": "LOGIN_SCREEN",
+      "start": "00:05",
+      "end": "00:09",
+      "notes": "Show login interaction",
+      "tags": [
+        "login",
+        "ui"
+      ]
+    },
+    {
+      "label": "DASHBOARD",
+      "start": "00:10",
+      "end": "00:14",
+      "notes": "Display dashboard content",
+      "tags": [
+        "dashboard"
+      ]
+    },
+    {
+      "label": "NAVIGATION",
+      "start": "00:15",
+      "end": "00:19",
+      "notes": "Navigate through the app",
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "label": "ERROR_POPUP",
+      "timestamp": "00:20",
+      "pre_buffer": "00:02",
+      "post_buffer": "00:03",
+      "notes": "Capture the error popup",
+      "tags": [
+        "error"
+      ]
+    },
+    {
+      "label": "RECOVERY",
+      "start": "00:25",
+      "end": "00:29",
+      "notes": "Show recovery flow",
+      "tags": [
+        "recovery"
+      ]
+    },
+    {
+      "label": "SESSION_END",
+      "start": "00:30",
+      "end": "00:34",
+      "notes": "Wrap up the session",
+      "tags": [
+        "session"
+      ]
+    }
+  ]
+}
